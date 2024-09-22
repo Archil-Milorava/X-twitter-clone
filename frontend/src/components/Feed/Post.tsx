@@ -1,41 +1,24 @@
-import { useState } from "react";
-import Button from "../../ui/Button";
+import Activity from "../ui/Activity";
+import PoseterInfo from "../ui/PoseterInfo";
 
 function Post() {
-const [text, setText] = useState("")
-
-function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    setText(e.target.value)
-    e.target.style.height = "auto";
-    e.target.style.height = e.target.scrollHeight + "px"
-}
-
   return (
-    <main className="w-full p-2 flex flex-col justify-between border-b-2 border-[#2F3336]">
-      <div className="w-full flex gap-3 items-start p-2 relative ">
-        <img
-          src="https://avatar.iran.liara.run/public/boy"
-          alt="avatar"
-          className="h-10"
-        />
-        <textarea
-        onChange={handleChange}
-        value={text}
-        rows={2}
-          className="bg-black text-lg w-full  h-auto  p-1 text-white
-          outline-none resize-none
-          focus:border-b border-[#2F3336] transition-all
-          placeholder:text-[#52595e] placeholder:text-2xl
-          overflow-y-hidden "
-          placeholder="What is happening?!"
-        />
-      </div>
-      <div className="w-full flex justify-end items-end">
-        <div className="w-20 h-8">
-          <Button>Post</Button>
+    <div className="flex flex-col   w-full p-4 border-b border-[#2F3336]">
+      <PoseterInfo />
+
+      <div className=" flex flex-col items-end">
+        <div>
+          <img
+            src="https://plus.unsplash.com/premium_photo-1683134240084-ba074973f75e?q=80&w=1895&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="s"
+            className="h-auto max-h-[20rem] rounded-2xl shadow-2xl"
+          />
         </div>
+        <section className="mt-2">
+        </section>
+          <Activity />
       </div>
-    </main>
+    </div>
   );
 }
 

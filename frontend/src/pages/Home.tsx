@@ -1,20 +1,26 @@
-import Post from "../components/Feed/Post"
-import Sidebar from "../components/Sidebar/Sidebar"
+import Post from "../components/Feed/Post";
+import PostSomething from "../components/Feed/PostSomething";
+import Sidebar from "../components/Sidebar/Sidebar";
 
 function Home() {
   return (
-    <main className="bg-[#000000] grid grid-cols-[1fr_3fr_2fr] h-screen w-full px-36">
-       <section className="w-[18rem] h-screen max-h-screen">
+    <main className="bg-[#000000] grid grid-cols-[1fr_3fr_2fr]  w-full px-36">
+      <section className="w-[18rem] h-screen max-h-screen sticky top-0">
         <Sidebar />
-       </section>
-       <section className="bg-gree-400 w-[36rem] h-full flex flex-col">
+      </section>
+      <section className=" w-[36rem]   flex flex-col  overflow-y-scroll scrollbar-none">
+        <PostSomething />
         <Post />
-       </section>
-       <section className="bg-blue-400 w-full h-full">
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+      </section>
+      <section className="bg-blue-400 w-full h-screen sticky top-0">
         hello
-       </section>
+      </section>
     </main>
-  )
+  );
 }
 
-export default Home
+export default Home;
