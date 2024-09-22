@@ -1,21 +1,13 @@
-import { Link } from "react-router-dom";
-import { IoMdArrowBack } from "react-icons/io";
 import { IoCalendarOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import GoBack from "./GoBack";
 
 
 function User() {
   return (
     <main className="border-b border-[#2F3336]">
       <section className="relative h-16 flex items-center px-5 gap-4">
-        <Link to={"/"}>
-          <IoMdArrowBack className="text-white text-2xl hover:bg-[#4d5053]  rounded-full transition-all" />
-        </Link>
-        <div className="">
-          <h1 className="text-white font-bold text-xl tracking-wide">
-            achi milrava
-          </h1>
-          <p className="text-[#71767B] text-xs">posts 3</p>
-        </div>
+        <GoBack />
       </section>
       <section className="w-full ">
         <div className=" w-full ">
@@ -49,10 +41,10 @@ function User() {
             <p className="text-[#71767B] text-sm">joined june 2022</p>
           </div>
           <div className="flex gap-5">
-            <Link className="text-[#71767B] hover:underline">
+            <Link to={"/profile/followers"} className="text-[#71767B] hover:underline">
               <span className="font-semibold text-white">440</span> Followers
             </Link>
-            <Link className="text-[#71767B] hover:underline">
+            <Link to={"/profile/following"} className="text-[#71767B] hover:underline">
               <span className="font-semibold text-white">120</span> Following
             </Link>
           </div>
