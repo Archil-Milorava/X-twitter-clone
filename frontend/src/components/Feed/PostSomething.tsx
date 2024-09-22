@@ -4,6 +4,8 @@ import Button from "../../ui/Button";
 function PostSomething() {
   const [text, setText] = useState("");
 
+
+
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setText(e.target.value);
     e.target.style.height = "auto";
@@ -16,7 +18,7 @@ function PostSomething() {
         <img
           src="https://avatar.iran.liara.run/public/boy"
           alt="avatar"
-          className="h-10"
+          className="h-10 "
         />
         <textarea
           onChange={handleChange}
