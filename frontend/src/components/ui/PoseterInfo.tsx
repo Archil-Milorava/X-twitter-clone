@@ -15,9 +15,7 @@ function PoseterInfo() {
           </a>
           <p className="text-[#71767B] text-sm">@achimilorava</p>
         </div>
-        <div className="text-sm max-w-[32rem] text-white">
-        A tough evening under the lights here in Singapore
-        </div>
+        
       </section>
     </div>
   );

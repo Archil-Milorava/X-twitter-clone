@@ -9,12 +9,12 @@ function Followers() {
             className="h-10"
           />
           <div className="flex flex-col ">
-            <h1 className="font-bold text-white ">Mercedes</h1>
-            <p className="text-[#71767B] text-sm">@mercedes</p>
+            <h1 className="font-bold text-white ">follower</h1>
+            <p className="text-[#71767B] text-sm">@mclaren</p>
           </div>
         </div>
         <button className="w-20 h-8 bg-white rounded-full text-black font-semibold cursor-pointer hover:bg-opacity-80 transition-all">
-          Following
+          follow 
         </button>
       </div>
     )

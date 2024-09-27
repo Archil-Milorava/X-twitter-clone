@@ -6,6 +6,11 @@ import WhoToFollowCard from "../components/ui/WhoToFollowCard";
 import User from "../components/User/User";
 
 export default function Profile() {
+
+
+
+
+  
   return (
     <main className="bg-[#000000] grid grid-cols-[1fr_3fr_2fr]  w-full px-36">
       <section className="w-[18rem] h-screen max-h-screen sticky top-0">

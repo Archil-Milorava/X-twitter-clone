@@ -10,8 +10,7 @@ function Activity() {
       text-[#71767B] 
       hover:text-green-300
       hover:rounded-full
-transition-all
-      "
+transition-all "
       >
         <Link>
           <FaRegComment className="text-xl " />
@@ -28,7 +27,7 @@ transition-all
 transition-all"
       >
         <Link>
-          <FaRegHeart className="text-xl  " />
+          <FaRegHeart className="text-xl" />
         </Link>
         <p className="text-sm">321</p>
       </li>

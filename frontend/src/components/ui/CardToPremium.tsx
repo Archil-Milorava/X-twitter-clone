@@ -1,4 +1,4 @@
-import Button from "../../ui/Button";
+import { Link } from "react-router-dom";
 
 function CardToPremium() {
   return (
@@ -9,7 +9,7 @@ function CardToPremium() {
         revenue.
       </p>
       <div className="h-10 text-sm w-28 ">
-        <Button>Subscribe</Button>
+        <Link to={"/premium"} className="text-white bg-[#1D9BF0] flex items-center justify-center rounded-full w-22 h-10  hover:bg-opacity-90 transition-all">Subscribe</Link>
       </div>
     </div>
   );
