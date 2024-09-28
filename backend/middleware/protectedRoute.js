@@ -5,7 +5,7 @@ export const protectedRoute = async (req, res, next) => {
   try {
     const token = req.cookies.token;
     if (!token) {
-      return res.status(401).json({ message: "No token provided" });
+      return res.status(401).json({ message: "Log in please" });
     }
 
     const verified = jwt.verify(token, process.env.JWT_SECRET);
