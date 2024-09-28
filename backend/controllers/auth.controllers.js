@@ -31,7 +31,18 @@ export const signup = async (req, res) => {
       await newUser.save();
       res.status(201).json({
         status: "success",
-        newUser,
+        newUser: {
+          _id: newUser._id,
+          fullName: newUser.fullName,
+          userName: newUser.userName,
+          email: newUser.email,
+          followers: newUser.followers,
+          following: newUser.following,
+          profilePicture: newUser.profilePicture,
+          coverImage: newUser.coverImage,
+          bio: newUser.bio,
+          link: newUser.link,
+        },
       });
     }
   } catch (error) {
@@ -73,6 +84,20 @@ export const logout = async (req, res) => {
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.log("error from logout", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const authCheck = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).select("-password");
+
+    res.status(200).json({
+      status: "success",
+      user,
+    });
+  } catch (error) {
+    console.log("error from authCheck", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
