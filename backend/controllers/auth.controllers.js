@@ -1,53 +1,30 @@
-import { generateTokenAndSetCookie } from "../lib/generateToken.js";
-import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
+import User from "../models/user.model.js";
+import jwt from "jsonwebtoken";
+
+const signToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "15d",
+  });
+};
 
 export const signup = async (req, res) => {
   try {
-    const { userName, fullName, email, password } = req.body;
-
-    const existingUserName = await User.findOne({ userName });
-    const existingEmail = await User.findOne({ email });
-
-    if (existingUserName) {
-      res.status(400).json({ message: "Username already exists" });
-    }
-    if (existingEmail) {
-      res.status(400).json({ message: "Email already exists" });
-    }
-
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-    const newUser = new User({
-      fullName,
-      userName,
-      email,
+    const newUser = await User.create({
+      ...req.body,
       password: hashedPassword,
     });
 
-    if (newUser) {
-      generateTokenAndSetCookie(newUser._id, res);
-      await newUser.save();
-      res.status(201).json({
-        status: "success",
-        newUser: {
-          _id: newUser._id,
-          fullName: newUser.fullName,
-          userName: newUser.userName,
-          email: newUser.email,
-          followers: newUser.followers,
-          following: newUser.following,
-          profilePicture: newUser.profilePicture,
-          coverImage: newUser.coverImage,
-          bio: newUser.bio,
-          link: newUser.link,
-        },
-      });
-    }
+    res.status(201).json({
+      status: "success",
+      newUser,
+    });
   } catch (error) {
-    console.log("error from signUp", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.log("error from signup", error);
+    res.status(500).json({ message: "error from signup" });
   }
 };
 
@@ -55,21 +32,37 @@ export const login = async (req, res) => {
   try {
     const { userName, password } = req.body;
 
-    const existingUser = await User.findOne({ userName });
+    if (!userName || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const existingUser = await User.findOne({ userName }).select("+password");
+
+    if (!existingUser) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
     const isMatch = await bcrypt.compare(
       password,
       existingUser?.password || ""
     );
 
-    if (!existingUser || !isMatch) {
-      res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid password" });
     }
 
-    generateTokenAndSetCookie(existingUser._id, res);
+    const token = signToken(existingUser._id);
+
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Only set secure to true in production
+      sameSite: "None", // Required for cross-origin cookies
+      maxAge: 10 * 24 * 60 * 60 * 1000,
+    });
 
     res.status(200).json({
       status: "success",
-      existingUser,
+      token,
     });
   } catch (error) {
     console.log("error from login", error);
@@ -79,7 +72,7 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.cookie("token", "", { maxAge: 0 });
+    res.cookie("jwt", "", { maxAge: 0 });
 
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {

@@ -1,27 +1,37 @@
-import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
+import User from "../models/user.model.js";
 
 export const protectedRoute = async (req, res, next) => {
   try {
-    const token = req.cookies.token;
+    let token;
+
+    if (req.headers.cookie?.split("=")[1]) {
+      token = req.headers.cookie.split("=")[1];
+    }
+
     if (!token) {
-      return res.status(401).json({ message: "Log in please" });
+      return res.status(401).json({ message: "Please log in" });
     }
 
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
-    if (!verified) {
-      return res.status(401).json({ message: "Invalid token" });
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+
+    if (!decoded) {
+      return res.status(401).json({ message: "session expired" });
     }
 
-    const user = await User.findById(verified.id).select("-password");
-    if (!user) {
-      return res.status(401).json({ message: "User not found" });
+    const currentUser = await User.findById(decoded.id);
+
+    if (!currentUser) {
+      return res.status(401).json({ message: "Please log in first" });
     }
 
-    req.user = user;
+    req.user = currentUser;
+
+    console.log(currentUser);
+
     next();
   } catch (error) {
     console.log("error from protectedRoute", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "error from protectedRoute" });
   }
 };

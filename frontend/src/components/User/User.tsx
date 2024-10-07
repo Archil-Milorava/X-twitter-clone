@@ -2,19 +2,13 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import GoBack from "./GoBack";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 function User() {
-  const [user, setUser] = useState([]);
 
+ 
+  
   
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/user/")
-      .then((res) => setUser(res.data.users[3]));
-  }, []);
 
   return (
     <main className="border-b border-[#2F3336]">
@@ -24,15 +18,15 @@ function User() {
       <section className="w-full ">
         <div className=" w-full ">
           <LazyLoadImage
-            alt={user.coverImage}
-            src={user.coverImage}
+            alt="cover"
+            src="/"
             className="h-[14rem]  object-cover w-full shadow-lg"
           />
         </div>
         <div className="absolute  rounded-full skeleton   translate-x-1/2 -translate-y-16">
           <LazyLoadImage
             loading="lazy"
-            src={user.profilePicture}
+            src="/"
             className="h-[10rem] w-[10rem] rounded-full border-4 border-black object-cover "
           />
         </div>
@@ -45,8 +39,8 @@ function User() {
       <section className="mt-8">
         <div className=" w-full p-4 flex flex-col gap-5 items-start">
           <div>
-            <h1 className="text-white text-3xl font-semibold">{user.fullName}</h1>
-            <p className="text-[#71767B] ">@{user.userName}</p>
+            <h1 className="text-white text-3xl font-semibold">achi milorava</h1>
+            <p className="text-[#71767B] ">@achimilo</p>
           </div>
           <div className="flex items-center gap-3">
             <IoCalendarOutline className="text-[#71767B]" />

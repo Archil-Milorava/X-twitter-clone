@@ -1,11 +1,11 @@
-import { useLocation, useSearchParams } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import Sidebar from "../components/Sidebar/Sidebar"
 import CardToPremium from "../components/ui/CardToPremium"
 import SearchBar from "../components/ui/SearchBar"
 import WhoToFollowCard from "../components/ui/WhoToFollowCard"
+import Followers from "../components/User/Followers"
 import Following from "../components/User/Following"
 import GoBack from "../components/User/GoBack"
-import Followers from "../components/User/Followers"
 
 function FollowerOrFollowing() {
 const location = useLocation()

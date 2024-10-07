@@ -15,11 +15,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       minLength: 6,
+      select: false
     },
     email: {
       type: String,
       required: true,
       unique: true,
+      lowercase: true,
     },
     followers: [
       {

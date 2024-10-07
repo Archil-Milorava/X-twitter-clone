@@ -1,17 +1,22 @@
-import { Route, Routes } from "react-router-dom"
-import Home from "./pages/Home"
-import Login from "./pages/Login"
-import Profile from "./pages/Profile"
-import FollowerOrFollowing from "./pages/FollwerOrFollowing"
-import Premium from "./pages/Premium"
-import Compose from "./pages/Compose"
+import { Route, Routes } from "react-router-dom";
+import Compose from "./pages/Compose";
+import FollowerOrFollowing from "./pages/FollwerOrFollowing";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Premium from "./pages/Premium";
+import Profile from "./pages/Profile";
+import Signup from "./pages/Signup";
 
 function App() {
+  
+  
+
   return (
     <div className="">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/following" element={<FollowerOrFollowing />} />
         <Route path="/profile/followers" element={<FollowerOrFollowing />} />
@@ -19,7 +24,7 @@ function App() {
         <Route path="/compose" element={<Compose />} />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

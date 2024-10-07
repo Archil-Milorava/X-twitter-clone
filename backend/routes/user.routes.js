@@ -9,7 +9,7 @@ import { protectedRoute } from "../middleware/protectedRoute.js";
 
 const usersRoute = express.Router();
 
-usersRoute.get("/:userName", protectedRoute, getUser);
+usersRoute.get("/:userName", getUser);
 usersRoute.post("/follow/:id", protectedRoute, followUnfollowUser);
 usersRoute.get("/suggestedUsers/:id", protectedRoute, getSuggestedUsers);
 usersRoute.post("/updateBio", protectedRoute, updateUser);
