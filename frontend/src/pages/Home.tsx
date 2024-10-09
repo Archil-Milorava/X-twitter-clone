@@ -1,13 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
 import Post from "../components/Feed/Post";
 import PostSomething from "../components/Feed/PostSomething";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CardToPremium from "../components/ui/CardToPremium";
 import SearchBar from "../components/ui/SearchBar";
 import WhoToFollowCard from "../components/ui/WhoToFollowCard";
+import { useGetPosts } from "../services/usePosts";
 
 
 
 function Home() {
+  const {data: posts} = useQuery({
+    queryKey: ["posts"],
+    queryFn: useGetPosts
+  }
+)
+
 
 
 
@@ -19,7 +27,9 @@ function Home() {
       <section className=" w-[36rem]   flex flex-col  overflow-y-scroll scrollbar-none">
         <PostSomething />
 
-        <Post  />
+        {posts?.map((post) => (
+          <Post key={post._id} post={post} />
+        ))}
       </section>
       <section className="border-l border-[#2F3336] px-5  w-full h-screen sticky top-0  pt-4 flex flex-col items-center gap-3">
         <SearchBar />

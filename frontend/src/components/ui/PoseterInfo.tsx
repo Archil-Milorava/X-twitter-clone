@@ -1,8 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 
-
-
-
-function PoseterInfo() {
+function PoseterInfo({ user }) {
   return (
     <div className="w-full flex gap-2 mb-2 cursor-pointer text-opacity-75">
       <div>
@@ -15,11 +13,10 @@ function PoseterInfo() {
       <section>
         <div className="flex gap-1 items-center">
           <a className="text-[#E7E9EA] font-bold tracking-wide">
-          asdsad
+            {user.fullName}
           </a>
-          <p className="text-[#71767B] text-sm">@assa</p>
+          <p className="text-[#71767B] text-xs">@{user.userName}</p>
         </div>
-        
       </section>
     </div>
   );

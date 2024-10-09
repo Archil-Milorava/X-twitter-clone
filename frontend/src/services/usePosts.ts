@@ -7,7 +7,7 @@ interface User {
     fullName: string,
 }
 
-interface Post {
+export interface Post {
   _id: string;
   user: User;
   text: string;
@@ -25,3 +25,10 @@ export const useGetPosts = async (): Promise<Post[]> => {
 
   return response;
 };
+
+
+export const useDeletePost = async(postId: string) => {
+  
+  const response = axios.delete(`http://localhost:5000/api/posts/${postId}`).then((res) => res.data).catch((err) => console.log(err.response.data));
+  return response
+}

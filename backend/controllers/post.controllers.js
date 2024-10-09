@@ -42,6 +42,7 @@ export const createPost = async (req, res) => {
 
 export const deletePost = async (req, res) => {
   try {
+    
     const { id } = req.params;
 
     const post = await Post.findById(id);
@@ -50,11 +51,11 @@ export const deletePost = async (req, res) => {
       return res.status(404).json({ message: "Post not found" });
     }
 
-    if (post.user.toString() !== req.user._id.toString()) {
-      return res
-        .status(401)
-        .json({ message: "you are not allowed to delete this post" });
-    }
+    // if (post.user.toString() !== req.user._id.toString()) {
+    //   return res
+    //     .status(401)
+    //     .json({ message: "you are not allowed to delete this post" });
+    // }
 
     if (post.image) {
       const imgId = post.image.split("/").pop().split(".")[0];

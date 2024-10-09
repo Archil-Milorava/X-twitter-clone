@@ -1,11 +1,12 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import { CiSearch, CiUser } from "react-icons/ci";
 import { FaRegEnvelope, FaXTwitter } from "react-icons/fa6";
 import { GoHomeFill } from "react-icons/go";
-import { IoMdNotificationsOutline } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import Compose from "../../pages/Compose";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+
+
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -25,10 +26,16 @@ export default function Sidebar() {
     },
   });
 
+  const {data: userData, isLoading} = useQuery({queryKey: ["user"]})
+
   
 
   function handleLogout() {
     mutate();
+  }
+
+  if (isLoading) {
+    return <p>Loading...</p>;
   }
 
   return (
@@ -94,9 +101,9 @@ export default function Sidebar() {
           </div>
           <div className="w-full ">
             <h1 className="tracking-wide text-white font-bold">
-              Archil Milorava
+              {userData.fullName}
             </h1>
-            <p className="text-sm text-gray-500">@name</p>
+            <p className="text-sm text-gray-500">@{userData.userName}</p>
           </div>
           <button  className="text-red-400" onClick={handleLogout}>
             log out
