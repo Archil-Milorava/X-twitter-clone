@@ -4,25 +4,28 @@ import { GoHomeFill } from "react-icons/go";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import Compose from "../../pages/Compose";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 export default function Sidebar() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
-    mutationKey: ["logout"],
     mutationFn: async () => {
       await axios
-        .post("http://localhost:5000/api/auth/logout")
+        .post("http://localhost:5000/api/auth/logout", {}, {withCredentials: true})
         .then((res) => res.data)
         .catch((err) => console.log(err.response.data));
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ["user"]});
       navigate("/login");
-      console.log("success");
+      console.log("successfully logged out");
     },
   });
+
+  
 
   function handleLogout() {
     mutate();
@@ -42,22 +45,22 @@ export default function Sidebar() {
             className="  w-fullh-14 flex items-center gap-4 p-2 hover:bg-[#E7E9EA] hover:bg-opacity-10 rounded-full transition-all cursor-pointer "
           >
             <GoHomeFill className="text-3xl text-white" />
-            <a className="text-xl font-semibold text-white ">Home</a>
+            <p className="text-xl font-semibold text-white ">Home</p>
           </Link>
 
           <Link className="w-full h-14 flex items-center gap-4 p-2 hover:bg-[#E7E9EA] hover:bg-opacity-10 rounded-full transition-all cursor-pointer ">
             <CiSearch className="text-3xl text-white" />
-            <a className="text-xl font-semibold text-white">Search</a>
+            <p className="text-xl font-semibold text-white">Search</p>
           </Link>
 
-          <Link className="w-full h-14 flex items-center gap-4 p-2 hover:bg-[#E7E9EA] hover:bg-opacity-10 rounded-full transition-all cursor-pointer ">
+          {/* <Link className="w-full h-14 flex items-center gap-4 p-2 hover:bg-[#E7E9EA] hover:bg-opacity-10 rounded-full transition-all cursor-pointer ">
             <IoMdNotificationsOutline className="text-3xl text-white" />
             <Link className="text-xl font-bold text-white">Notification</Link>
-          </Link>
+          </Link> */}
 
           <li className="w-full h-14 flex items-center gap-4 p-2 hover:bg-[#E7E9EA] hover:bg-opacity-10 rounded-full transition-all cursor-pointer ">
             <FaRegEnvelope className="text-3xl text-white" />
-            <a className="text-xl font-semibold text-white">Messages</a>
+            <p className="text-xl font-semibold text-white">Messages</p>
           </li>
 
           <Link
@@ -65,7 +68,7 @@ export default function Sidebar() {
             className="w-full h-14 flex items-center gap-4 p-2 hover:bg-[#E7E9EA] hover:bg-opacity-10 rounded-full transition-all cursor-pointer "
           >
             <FaXTwitter className="text-3xl text-white" />
-            <a className="text-xl font-semibold text-white">Premium</a>
+            <p className="text-xl font-semibold text-white">Premium</p>
           </Link>
 
           <Link
@@ -73,7 +76,7 @@ export default function Sidebar() {
             className="w-full h-14 flex items-center gap-4 p-2 hover:bg-[#E7E9EA] hover:bg-opacity-10 rounded-full transition-all cursor-pointer "
           >
             <CiUser className="text-3xl text-white" />
-            <a className="text-xl font-semibold text-white">Profile</a>
+            <p className="text-xl font-semibold text-white">Profile</p>
           </Link>
         </ul>
       </nav>
@@ -95,7 +98,7 @@ export default function Sidebar() {
             </h1>
             <p className="text-sm text-gray-500">@name</p>
           </div>
-          <button className="text-red-400" onClick={handleLogout}>
+          <button  className="text-red-400" onClick={handleLogout}>
             log out
           </button>
         </div>

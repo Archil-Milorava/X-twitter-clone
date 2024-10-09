@@ -5,7 +5,7 @@ import { commentOnPost, createPost, deletePost,  getPosts, likeUnlikePost } from
 const postsRoute = express.Router();
 
 
-postsRoute.get("/all", protectedRoute, getPosts)
+postsRoute.get("/all",  getPosts)
 postsRoute.post("/create", protectedRoute, createPost)
 postsRoute.delete("/:id", protectedRoute, deletePost)
 postsRoute.post("/comment/:id", protectedRoute, commentOnPost)

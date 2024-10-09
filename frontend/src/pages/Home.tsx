@@ -1,28 +1,15 @@
-import { useEffect, useState } from "react";
 import Post from "../components/Feed/Post";
 import PostSomething from "../components/Feed/PostSomething";
 import Sidebar from "../components/Sidebar/Sidebar";
 import CardToPremium from "../components/ui/CardToPremium";
 import SearchBar from "../components/ui/SearchBar";
 import WhoToFollowCard from "../components/ui/WhoToFollowCard";
-import axios from "axios";
 
-interface Post {
-  _id: string;
-  text: string;
-  image: string;
-}
+
 
 function Home() {
-  const [posts, setPosts] = useState<Post[]>([]);
 
-  console.log(posts);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/posts/")
-      .then((res) => setPosts(res.data.posts));
-  }, []);
 
   return (
     <main className="bg-[#000000] grid grid-cols-[1fr_3fr_2fr]  w-full px-36">
@@ -32,9 +19,7 @@ function Home() {
       <section className=" w-[36rem]   flex flex-col  overflow-y-scroll scrollbar-none">
         <PostSomething />
 
-        {posts.map((post) => (
-          <Post key={post._id} post={post} />
-        ))}
+        <Post  />
       </section>
       <section className="border-l border-[#2F3336] px-5  w-full h-screen sticky top-0  pt-4 flex flex-col items-center gap-3">
         <SearchBar />

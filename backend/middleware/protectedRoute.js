@@ -5,9 +5,10 @@ export const protectedRoute = async (req, res, next) => {
   try {
     let token;
 
-    if (req.headers.cookie?.split("=")[1]) {
-      token = req.headers.cookie.split("=")[1];
+    if (req.cookies.jwt) {
+      token = req.cookies.jwt;
     }
+	
 
     if (!token) {
       return res.status(401).json({ message: "Please log in" });
@@ -26,8 +27,6 @@ export const protectedRoute = async (req, res, next) => {
     }
 
     req.user = currentUser;
-
-    console.log(currentUser);
 
     next();
   } catch (error) {

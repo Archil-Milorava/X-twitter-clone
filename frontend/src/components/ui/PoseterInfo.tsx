@@ -1,3 +1,7 @@
+
+
+
+
 function PoseterInfo() {
   return (
     <div className="w-full flex gap-2 mb-2 cursor-pointer text-opacity-75">
@@ -11,9 +15,9 @@ function PoseterInfo() {
       <section>
         <div className="flex gap-1 items-center">
           <a className="text-[#E7E9EA] font-bold tracking-wide">
-          Mercedes-AMG PETRONAS F1
+          asdsad
           </a>
-          <p className="text-[#71767B] text-sm">@achimilorava</p>
+          <p className="text-[#71767B] text-sm">@assa</p>
         </div>
         
       </section>

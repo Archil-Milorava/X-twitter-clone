@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import XSvg from "../ui/XSvg";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { MdOutlineMail, MdPassword } from "react-icons/md";
 
@@ -14,10 +14,10 @@ const Login = () => {
   });
 
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
 
   const { mutate, isPending, error } = useMutation({
-    mutationKey: ["login"],
     mutationFn: async () => {
       await axios
         .post("http://localhost:5000/api/auth/login", formData, {withCredentials: true})
@@ -25,8 +25,9 @@ const Login = () => {
         .catch((err) => console.log(err.response.data));
     },
     onSuccess: () => {
-      console.log("success");
       navigate("/");
+      console.log("success");
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
 

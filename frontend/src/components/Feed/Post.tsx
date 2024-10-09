@@ -1,33 +1,27 @@
 import Activity from "../ui/Activity";
 import PoseterInfo from "../ui/PoseterInfo";
 
-// interface Postprops {
-//   post: {
-//     _id: string;
-//     text: string;
-//     image: string;
-//   };
-// }
+
 
 function Post() {
 
-// const { _id, text, image } = post;
+
 
   return (
     <div className="flex flex-col   w-full p-4 border-b border-[#2F3336]">
-      <PoseterInfo />
+      <PoseterInfo  />
 
       <div className=" flex flex-col items-end">
-      {/* <div className="text-white p-2 text-sm  w-full">
-        {text}
+      <div className="text-white p-2 text-sm  w-full">
+        sadas
         </div>
         <div>
           <img
-            src={image}
-            alt={_id}
+            src="as"
+            alt="asd"
             className="h-auto w-full max-h-full rounded-2xl shadow-2xl"
           />
-        </div> */}
+        </div>
         <section className="mt-2"></section>
         <Activity />
       </div>
