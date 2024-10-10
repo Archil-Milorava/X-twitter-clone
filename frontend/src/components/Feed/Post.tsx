@@ -44,11 +44,12 @@ function Post({ post }) {
         )}
         <div className="text-white p-2 text-sm  w-full">{text}</div>
         <div className="max-w-full max-h-[35rem]">
-          <img
-            src={image}
-            alt={_id}
-            className="h-auto object-cover  w-full max-h-full rounded-2xl shadow-2xl"
-          />
+          {image && (
+            <img
+              src={image}
+              className="w-full object-cover h-[35rem] rounded-2xl"
+              alt="post" />)
+          }
         </div>
         <section className="mt-2"></section>
         <Activity likes={likes} comments={comments} />
